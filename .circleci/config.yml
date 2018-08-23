@@ -3,19 +3,19 @@ jobs:
   build:
     steps:
       - save_cache:
-        key: dependency-cache
-        paths:
-          - ~/k6-bin
+          key: dependency-cache
+          paths:
+            - ~/k6-bin
       - checkout
       - run: mkdir -p ~/k6-bin
       - run:
-        name: install loadimpact
-        command: |
-          if [[ ! -f ~/k6-bin/k6 ]]; then
-            curl -O -L https://github.com/loadimpact/k6/releases/download/v0.15.0/k6-v0.15.0-linux64.tar.gz;
-            tar -xvzf k6-v0.15.0-linux64.tar.gz;
-            mv k6-v0.15.0-linux64/k6 ~/k6-bin/k6;
-          fi
+          name: install loadimpact
+          command: |
+            if [[ ! -f ~/k6-bin/k6 ]]; then
+              curl -O -L https://github.com/loadimpact/k6/releases/download/v0.15.0/k6-v0.15.0-linux64.tar.gz;
+              tar -xvzf k6-v0.15.0-linux64.tar.gz;
+              mv k6-v0.15.0-linux64/k6 ~/k6-bin/k6;
+            fi
       - run:
-        name: tests
-        command: ~/k6-bin/k6 run -q -o cloud loadtests/main.js
+          name: tests
+          command: ~/k6-bin/k6 run -q -o cloud loadtests/main.js
